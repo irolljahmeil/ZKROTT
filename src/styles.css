@@ -268,11 +268,36 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.25rem;
-  padding: 1rem clamp(1rem, 4vw, 3rem);
-  background: rgba(7, 11, 11, 0.86);
-  border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(14px);
+  gap: 1rem;
+  width: 100%;
+  min-height: 4.75rem;
+  padding: max(0.8rem, env(safe-area-inset-top)) clamp(0.9rem, 4vw, 3rem) 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(89, 199, 123, 0.08) 42%, rgba(7, 11, 11, 0.42)),
+    rgba(7, 11, 11, 0.58);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  backdrop-filter: blur(24px) saturate(190%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    inset 0 -1px 0 rgba(2, 8, 6, 0.42),
+    0 12px 34px rgba(0, 0, 0, 0.22);
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 16% 0%, rgba(184, 255, 100, 0.16), transparent 32%),
+    radial-gradient(circle at 86% 18%, rgba(255, 92, 122, 0.14), transparent 30%);
+  opacity: 0.9;
+}
+
+header > * {
+  position: relative;
+  z-index: 1;
 }
 
 .logo {
@@ -325,19 +350,26 @@ h2,
 nav {
   display: flex;
   align-items: center;
-  gap: clamp(0.75rem, 2vw, 1.75rem);
-  color: var(--muted);
+  justify-content: flex-end;
+  gap: clamp(0.55rem, 1.5vw, 1.2rem);
+  min-width: 0;
+  color: rgba(241, 234, 220, 0.82);
   font-size: 0.9rem;
 }
 
 nav a {
+  padding: 0.5rem 0.7rem;
+  border-radius: 999px;
   text-decoration: none;
-  transition: color 0.2s ease;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
 nav a:hover,
 nav a:focus-visible {
   color: var(--acid);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
 }
 
 .nav-mint {
@@ -1011,6 +1043,16 @@ h2 {
   color: var(--muted);
   line-height: 1.7;
 }
+.final-cta .hero-actions {
+  grid-template-columns: minmax(0, 14rem);
+  justify-content: center;
+  width: min(100%, 18rem);
+  max-width: 18rem;
+}
+
+.final-cta .btn {
+  justify-self: center;
+}
 
 footer {
   position: relative;
@@ -1046,8 +1088,9 @@ footer {
   header {
     align-items: stretch;
     flex-direction: column;
-    gap: 0.85rem;
-    padding: 0.85rem 1rem;
+    gap: 0.65rem;
+    min-height: 7.9rem;
+    padding: max(0.7rem, env(safe-area-inset-top)) 0.85rem 0.7rem;
   }
 
   main {
@@ -1068,11 +1111,13 @@ footer {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
-    justify-content: start;
+    justify-content: center;
     width: 100%;
     overflow-x: auto;
-    gap: 0.75rem;
-    padding: 0.15rem 0 0.35rem;
+    gap: 0.55rem;
+    padding: 0.1rem 0.35rem 0.25rem;
+    scroll-padding-inline: 0.35rem;
+    box-sizing: border-box;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
   }
@@ -1130,7 +1175,9 @@ footer {
 
 @media (max-width: 560px) {
   header {
-    padding: 0.75rem 0.85rem;
+    gap: 0.55rem;
+    min-height: 7.65rem;
+    padding: max(0.65rem, env(safe-area-inset-top)) 0.75rem 0.65rem;
   }
 
   main {
@@ -1142,7 +1189,12 @@ footer {
   }
 
   nav {
-    font-size: 0.78rem;
+    gap: 0.45rem;
+    font-size: 0.76rem;
+  }
+
+  nav a {
+    padding: 0.45rem 0.55rem;
   }
 
   nav a {
@@ -1150,7 +1202,7 @@ footer {
   }
 
   .nav-mint {
-    padding: 0.55rem 0.75rem;
+    padding: 0.45rem 0.55rem;
   }
 
   .eyebrow {
@@ -1172,11 +1224,17 @@ footer {
     font-size: 1rem;
   }
 
-  .hero-actions,
-  .final-cta .hero-actions {
+  .hero-actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.7rem;
     max-width: none;
+  }
+
+  .final-cta .hero-actions {
+    grid-template-columns: minmax(0, 13rem);
+    justify-content: center;
+    width: min(100%, 16rem);
+    max-width: 16rem;
   }
 
   .btn {
@@ -1253,6 +1311,16 @@ footer {
 }
 
 @media (max-width: 380px) {
+  .final-cta h2 {
+    font-size: clamp(1.8rem, 10vw, 2.6rem);
+  }
+
+  .final-cta p {
+    max-width: 18rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
   .logo {
     font-size: 1.05rem;
   }
@@ -1263,7 +1331,13 @@ footer {
   }
 
   nav {
-    font-size: 0.72rem;
+    gap: 0.35rem;
+    font-size: 0.68rem;
+  }
+
+  nav a,
+  .nav-mint {
+    padding: 0.4rem 0.45rem;
   }
 
   h1 {

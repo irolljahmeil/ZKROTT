@@ -262,8 +262,8 @@ app.innerHTML = `
 
       <section class="final-cta">
         <div class="wrap">
-          <h2>Join The Pack</h2>
-          <p>ZkRott is getting ready for its genesis mint. Plug in your official links below and send collectors straight to the source.</p>
+          <h2>Join The Hoard</h2>
+          <p>ZkRott is getting ready for its genesis mint.</p>
           <div class="hero-actions centered">
             <a class="btn" href="https://x.com/0x_zkrott?s=11" target="_blank" rel="noopener">X / Twitter</a>
           </div>
