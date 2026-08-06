@@ -121,7 +121,7 @@ const traitsMarkup = traits
       <div class="trait">
         <div class="trait-icon">${trait.index}</div>
         <h3>${trait.title}</h3>
-        <p>${trait.values.join(" / ")}</p>
+        <div class="trait-copy">${trait.values.join(" / ")}</div>
       </div>
     `,
   )
@@ -153,7 +153,7 @@ app.innerHTML = `
     <span class="goo-blob blob-four"></span>
   </div>
   <div class="shell">
-    <header>
+    <div class="site-header">
       <a class="logo" href="#top" aria-label="ZkRott home">
         <img class="logo-image" src="/assets/zkrott-logo.png" alt="" />
         <span>ZkRott</span>
@@ -163,33 +163,33 @@ app.innerHTML = `
         <span></span>
         <span></span>
       </button>
-      <nav id="primary-nav" aria-label="Primary navigation">
+      <div class="site-nav" id="primary-nav" aria-label="Primary navigation">
         <a href="#collection">Collection</a>
         <a href="#gallery">Gallery</a>
         <a href="#lore">Lore</a>
         <a href="#traits">Traits</a>
         <a href="#roadmap">Roadmap</a>
         <a class="nav-mint" href="#mint">Mint</a>
-      </nav>
-    </header>
+      </div>
+    </div>
 
-    <main id="top">
-      <section class="hero" id="mint">
+    <div class="site-main" id="top">
+      <div class="hero" id="mint">
         <div class="wrap hero-grid">
           <div>
             <div class="eyebrow"><span class="status-dot"></span> Genesis mint opening soon</div>
             <h1>ZkRott</h1>
-            <p class="hero-copy">
+            <div class="hero-copy">
               A dark-chain NFT collection of corrupted guardians, forged for collectors who like their art loud,
               strange, and impossible to tame.
-            </p>
+            </div>
             <div class="hero-actions">
               <button class="btn btn-primary" type="button" disabled>Mint Soon</button>
               <a class="btn" href="#gallery">View Collection</a>
             </div>
           </div>
 
-          <aside class="mint-card" aria-label="Featured ZkRott NFT">
+          <div class="mint-card" aria-label="Featured ZkRott NFT">
             <div class="art-frame">
               <img class="hero-nft" src="/assets/zkrott-hero.jpg" alt="ZkRott zombie NFT character wearing headphones" />
             </div>
@@ -199,20 +199,20 @@ app.innerHTML = `
               <div class="detail-row"><span>Mint Price</span><strong>TBA</strong></div>
               <div class="detail-row"><span>Allowlist</span><strong>Opening Soon</strong></div>
             </div>
-          </aside>
+          </div>
         </div>
-      </section>
+      </div>
 
-      <section id="collection">
+      <div id="collection">
         <div class="wrap">
           <div class="section-head">
             <h2>The Collection</h2>
           </div>
           <div class="stats">${statsMarkup}</div>
         </div>
-      </section>
+      </div>
 
-      <section id="gallery">
+      <div id="gallery">
         <div class="wrap">
           <div class="section-head">
             <h2>Collection Preview</h2>
@@ -227,64 +227,64 @@ app.innerHTML = `
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="story" id="lore">
+      <div class="story" id="lore">
         <div class="wrap story-grid">
           <div>
             <div class="eyebrow"><span class="status-dot"></span> Transmission recovered</div>
             <h2>Born In The Noise</h2>
           </div>
           <div class="terminal">
-            <p>ZkRott woke beneath a city with no name, no pulse, and one memory trapped between his teeth.</p>
-            <p>His long skull, hollow nose, torn neck, and uneven grin mark him as a first Rott, survivors remade by the Zero Key blackout.</p>
-            <p>Every outfit, eye, scar, and mouth relic carries proof of the life he lost.</p>
-            <p>Some versions remember war, music, hunger, rebellion, or flooded tunnels. Others remember nothing.</p>
-            <p>The ZK mark on his chest binds him to the machine that killed the city and brought him back.</p>
-            <p>Now he walks from district to district, collecting broken memories before the Hollow Crown steals them.</p>
-            <p>He cannot truly die, but each return costs part of himself. When the last memory fades, only the grin remains.</p>
+            <div class="story-line">ZkRott woke beneath a city with no name, no pulse, and one memory trapped between his teeth.</div>
+            <div class="story-line">His long skull, hollow nose, torn neck, and uneven grin mark him as a first Rott, survivors remade by the Zero Key blackout.</div>
+            <div class="story-line">Every outfit, eye, scar, and mouth relic carries proof of the life he lost.</div>
+            <div class="story-line">Some versions remember war, music, hunger, rebellion, or flooded tunnels. Others remember nothing.</div>
+            <div class="story-line">The ZK mark on his chest binds him to the machine that killed the city and brought him back.</div>
+            <div class="story-line">Now he walks from district to district, collecting broken memories before the Hollow Crown steals them.</div>
+            <div class="story-line">He cannot truly die, but each return costs part of himself. When the last memory fades, only the grin remains.</div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="traits">
+      <div id="traits">
         <div class="wrap">
           <div class="section-head">
             <h2>Traits And Rarity</h2>
           </div>
           <div class="traits">${traitsMarkup}</div>
         </div>
-      </section>
+      </div>
 
-      <section id="roadmap">
+      <div id="roadmap">
         <div class="wrap">
           <div class="section-head">
             <h2>Roadmap</h2>
           </div>
           <div class="roadmap">${roadmapMarkup}</div>
         </div>
-      </section>
+      </div>
 
-      <section class="final-cta">
+      <div class="final-cta">
         <div class="wrap">
           <h2>Join The Hoard</h2>
-          <p>ZkRott is getting ready for its genesis mint.</p>
+          <div class="cta-copy">ZkRott is getting ready for its genesis mint.</div>
           <div class="hero-actions centered">
             <a class="btn" href="https://x.com/0x_zkrott?s=11" target="_blank" rel="noopener">X / Twitter</a>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
 
-    <footer>
+    <div class="site-footer">
       <div class="footer-row">
-        <p>&copy; 2026 ZkRott. All rights reserved.</p>
+        <div>&copy; 2026 ZkRott. All rights reserved.</div>
         <div class="socials">
           <a href="https://x.com/0x_zkrott?s=11" target="_blank" rel="noopener">X</a>
           <a href="#mint">Mint</a>
         </div>
       </div>
-    </footer>
+    </div>
   </div>
 `;
 const menuToggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
@@ -309,3 +309,84 @@ window.addEventListener("keydown", (event) => {
     setMenuOpen(false);
   }
 });
+const carousel = document.querySelector<HTMLElement>("[data-nft-carousel]");
+const firstCarouselTrack = carousel?.querySelector<HTMLElement>(".nft-track");
+
+const waitForCarouselImages = async () => {
+  const images = Array.from(firstCarouselTrack?.querySelectorAll<HTMLImageElement>("img") ?? []);
+
+  await Promise.all(
+    images.map(async (image) => {
+      if (image.complete) {
+        return;
+      }
+
+      if ("decode" in image) {
+        try {
+          await image.decode();
+          return;
+        } catch {
+          // Fall through to load/error listeners so one bad image cannot stop the carousel.
+        }
+      }
+
+      await new Promise<void>((resolve) => {
+        if (image.complete) {
+          resolve();
+          return;
+        }
+
+        image.addEventListener("load", () => resolve(), { once: true });
+        image.addEventListener("error", () => resolve(), { once: true });
+      });
+    }),
+  );
+};
+
+let carouselDistance = 0;
+let carouselFrame = 0;
+
+const updateCarouselMotion = () => {
+  carouselFrame = 0;
+
+  if (!carousel || !firstCarouselTrack) {
+    return;
+  }
+
+  const distance = Math.round(firstCarouselTrack.scrollWidth);
+
+  if (distance <= 0) {
+    carousel.classList.remove("is-ready");
+    return;
+  }
+
+  if (carousel.classList.contains("is-ready") && Math.abs(distance - carouselDistance) < 2) {
+    return;
+  }
+
+  carouselDistance = distance;
+
+  const pixelsPerSecond = 38;
+  const duration = Math.max(42, distance / pixelsPerSecond);
+
+  carousel.style.setProperty("--carousel-distance", `${distance}px`);
+  carousel.style.setProperty("--carousel-duration", `${duration.toFixed(2)}s`);
+  carousel.classList.add("is-ready");
+};
+
+const scheduleCarouselUpdate = () => {
+  if (carouselFrame) {
+    return;
+  }
+
+  carouselFrame = window.requestAnimationFrame(updateCarouselMotion);
+};
+
+void waitForCarouselImages().then(scheduleCarouselUpdate);
+
+window.addEventListener("load", scheduleCarouselUpdate);
+window.addEventListener("resize", scheduleCarouselUpdate);
+
+if ("ResizeObserver" in window && firstCarouselTrack) {
+  new ResizeObserver(scheduleCarouselUpdate).observe(firstCarouselTrack);
+}
