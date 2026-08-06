@@ -104,13 +104,13 @@ const statsMarkup = collectionStats
 const nftCarouselSetMarkup = nftItems
   .map(
     (item) => `
-      <article class="nft-card">
+      <div class="nft-card">
         <img src="${item.image}" alt="${item.name}" />
         <div class="nft-card-meta">
           <span>${item.name}</span>
           <strong>Genesis</strong>
         </div>
-      </article>
+      </div>
     `,
   )
   .join("");
@@ -118,11 +118,11 @@ const nftCarouselSetMarkup = nftItems
 const traitsMarkup = traits
   .map(
     (trait) => `
-      <article class="trait">
+      <div class="trait">
         <div class="trait-icon">${trait.index}</div>
         <h3>${trait.title}</h3>
         <p>${trait.values.join(" / ")}</p>
-      </article>
+      </div>
     `,
   )
   .join("");
@@ -130,13 +130,13 @@ const traitsMarkup = traits
 const roadmapMarkup = roadmap
   .map(
     (item) => `
-      <article class="roadmap-item">
+      <div class="roadmap-item">
         <span class="phase">${item.phase}</span>
         <h3>${item.title}</h3>
         <ul>
           ${item.items.map((roadmapItem) => `<li>${roadmapItem}</li>`).join("")}
         </ul>
-      </article>
+      </div>
     `,
   )
   .join("");
