@@ -158,7 +158,12 @@ app.innerHTML = `
         <img class="logo-image" src="/assets/zkrott-logo.png" alt="" />
         <span>ZkRott</span>
       </a>
-      <nav aria-label="Primary navigation">
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="primary-nav" aria-label="Primary navigation">
         <a href="#collection">Collection</a>
         <a href="#gallery">Gallery</a>
         <a href="#lore">Lore</a>
@@ -282,3 +287,25 @@ app.innerHTML = `
     </footer>
   </div>
 `;
+const menuToggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+const primaryNav = document.querySelector<HTMLElement>("#primary-nav");
+
+const setMenuOpen = (isOpen: boolean) => {
+  document.body.classList.toggle("menu-open", isOpen);
+  menuToggle?.setAttribute("aria-expanded", String(isOpen));
+  menuToggle?.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+};
+
+menuToggle?.addEventListener("click", () => {
+  setMenuOpen(!document.body.classList.contains("menu-open"));
+});
+
+primaryNav?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => setMenuOpen(false));
+});
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    setMenuOpen(false);
+  }
+});
