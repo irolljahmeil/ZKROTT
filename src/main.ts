@@ -93,7 +93,7 @@ app.innerHTML = `
               <a class="button button-primary" href="${OPENSEA_URL}" target="_blank" rel="noopener">Claim your unfinished face</a>
               <a class="button button-ghost" href="#rotwood">Enter Rotwood ↓</a>
             </div>
-            <div class="signal-strip"><span>CHAIN / ROBINHOOD</span><span>PRICE / $2.26</span><span>STATUS / LIVE</span></div>
+            <div class="signal-strip"><span>CHAIN / ROBINHOOD</span><span>PRICE / $1.24</span><span>STATUS / LIVE</span></div>
           </div>
 
           <aside class="mint-notice" aria-label="Public mint details">
@@ -104,7 +104,7 @@ app.innerHTML = `
               <div class="portrait-stamp">REMADE</div>
             </div>
             <div class="notice-title"><span>SUBJECT CLASS</span><h2>zkRott</h2><p>Last seen: Rotwood</p></div>
-            <dl class="mint-data"><div><dt>Fixed supply</dt><dd>1,111</dd></div><div><dt>Mint</dt><dd>$2.26</dd></div><div><dt>Stage</dt><dd>Public / Live</dd></div></dl>
+            <dl class="mint-data"><div><dt>Fixed supply</dt><dd>1,111</dd></div><div><dt>Mint</dt><dd>$1.24</dd></div><div><dt>Stage</dt><dd>Public / Live</dd></div></dl>
             <a class="button button-dark" href="${OPENSEA_URL}" target="_blank" rel="noopener">Take the memory ↗</a>
             <button class="contract-copy" type="button" data-copy><span>OFFICIAL CONTRACT</span><code>${CONTRACT_ADDRESS}</code><strong>Copy</strong></button>
           </aside>
