@@ -204,6 +204,10 @@ app.innerHTML = `
               <div class="detail-row"><span>Mint Price</span><strong>$2.26</strong></div>
               <div class="detail-row"><span>Status</span><strong>Public Mint Live</strong></div>
             </div>
+            <div class="contract-details">
+              <span>Contract Address</span>
+              <code>0x506588ac3c426468092e7ddb640d2bb1a429cd03</code>
+            </div>
           </div>
         </div>
       </div>
