@@ -86,8 +86,8 @@ h1 em { color: var(--paper); font-style: normal; }
 .notice-pin { position: absolute; z-index: 3; top: .55rem; left: 50%; width: .9rem; height: .9rem; border-radius: 50%; background: var(--blood-dark); box-shadow: 0 2px 3px rgba(0,0,0,.5); transform: translateX(-50%); }
 .notice-header { position: relative; z-index: 2; display: flex; justify-content: space-between; padding: .7rem .5rem 1rem; font: 700 .68rem var(--mono); letter-spacing: .08em; }
 .notice-header strong { color: var(--blood); }
-.notice-portrait { position: relative; overflow: hidden; border: 3px solid var(--ink); background: var(--ink); }
-.notice-portrait img { width: 100%; aspect-ratio: 1/1; object-fit: cover; filter: saturate(.7) contrast(1.08); }
+.notice-portrait { position: relative; aspect-ratio: 1/1; overflow: hidden; border: 3px solid var(--ink); background: var(--ink); }
+.notice-portrait img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.7) contrast(1.08); }
 .portrait-stamp { position: absolute; right: .65rem; bottom: .65rem; padding: .35rem .55rem; border: 3px solid var(--blood); color: var(--blood); font: 900 1.05rem var(--display); letter-spacing: .08em; transform: rotate(-8deg); }
 .notice-title { padding: 1rem .4rem .6rem; border-bottom: 1px solid rgba(33,31,26,.35); }
 .notice-title span, .mint-data dt { font: 700 .62rem var(--mono); letter-spacing: .09em; }
