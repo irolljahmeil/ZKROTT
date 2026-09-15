@@ -6,7 +6,7 @@ type RoadmapItem = { phase: string; title: string; items: string[] };
 type NftItem = { id: string; name: string; image: string };
 
 const collectionStats: Stat[] = [
-  { value: "2,000", label: "Genesis NFTs" },
+  { value: "1,111", label: "Genesis NFTs" },
   { value: "120+", label: "Trait Layers" },
   { value: "1", label: "Rotten Pack" },
 ];
@@ -194,7 +194,7 @@ app.innerHTML = `
               <img class="hero-nft" src="/assets/zkrott-hero.jpg" alt="ZkRott zombie NFT character wearing headphones" />
             </div>
             <div class="mint-details">
-              <div class="detail-row"><span>Supply</span><strong>2,000</strong></div>
+              <div class="detail-row"><span>Supply</span><strong>1,111</strong></div>
               <div class="detail-row"><span>Chain</span><strong>Robinhood</strong></div>
               <div class="detail-row"><span>Mint Price</span><strong>TBA</strong></div>
               <div class="detail-row"><span>Allowlist</span><strong>Opening Soon</strong></div>
