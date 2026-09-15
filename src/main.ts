@@ -196,8 +196,8 @@ app.innerHTML = `
             <div class="mint-details">
               <div class="detail-row"><span>Supply</span><strong>1,111</strong></div>
               <div class="detail-row"><span>Chain</span><strong>Robinhood</strong></div>
-              <div class="detail-row"><span>Mint Price</span><strong>TBA</strong></div>
-              <div class="detail-row"><span>Allowlist</span><strong>Opening Soon</strong></div>
+              <div class="detail-row"><span>Mint Price</span><strong>$2.26</strong></div>
+              <div class="detail-row"><span>Allowlist</span><strong>Ongoing</strong></div>
             </div>
           </div>
         </div>
