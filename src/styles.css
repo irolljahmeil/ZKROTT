@@ -249,6 +249,19 @@ body::before {
   .goo-blob {
     animation: none;
   }
+
+  .carousel-shell {
+    overflow-x: auto;
+  }
+
+  .nft-carousel {
+    animation: none;
+    transform: none;
+  }
+
+  .nft-track[aria-hidden="true"] {
+    display: none;
+  }
 }
 
 a {
@@ -529,6 +542,13 @@ h1 {
   gap: 0.9rem;
   margin-top: 2rem;
   max-width: 31rem;
+}
+
+.mint-note {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
 }
 
 .centered {
@@ -1144,6 +1164,34 @@ h2 {
   background: #050707;
 }
 
+@media (min-width: 901px) {
+  .site-nav {
+    position: static;
+    display: flex;
+    grid-template-columns: none;
+    width: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  .site-nav a {
+    min-height: 2.5rem;
+    padding: 0.55rem 0.7rem;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+}
+
 .footer-row {
   display: flex;
   align-items: center;
@@ -1335,11 +1383,29 @@ h2 {
   .nft-carousel {
     padding-left: 0;
     padding-right: 0;
+    animation: none;
+    transform: none;
     mask-image: none;
+  }
+
+  .carousel-shell {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .carousel-shell::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nft-track[aria-hidden="true"] {
+    display: none;
   }
 
   .nft-card {
     flex-basis: min(76vw, 280px);
+    scroll-snap-align: start;
   }
 
   .nft-card-meta {

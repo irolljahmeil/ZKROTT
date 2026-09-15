@@ -2,13 +2,13 @@ import "./styles.css";
 
 type Stat = { value: string; label: string };
 type Trait = { index: string; title: string; values: string[] };
-type RoadmapItem = { phase: string; title: string; items: string[] };
+type RoadmapItem = { phase: string; status: string; title: string; items: string[] };
 type NftItem = { id: string; name: string; image: string };
 
 const collectionStats: Stat[] = [
-  { value: "1,111", label: "Genesis NFTs" },
-  { value: "120+", label: "Trait Layers" },
-  { value: "1", label: "Rotten Pack" },
+  { value: "1,111", label: "Total Supply" },
+  { value: "$2.26", label: "Mint Price" },
+  { value: "Live", label: "Public Mint" },
 ];
 
 const nftImageIds = [
@@ -44,6 +44,7 @@ const traits: Trait[] = [
 const roadmap: RoadmapItem[] = [
   {
     phase: "Phase 1",
+    status: "Complete",
     title: "Build the Rott",
     items: [
       "Complete all ZkRott characters and rarity distribution",
@@ -54,6 +55,7 @@ const roadmap: RoadmapItem[] = [
   },
   {
     phase: "Phase 2",
+    status: "Live",
     title: "The Awakening",
     items: [
       "Announce supply, mint price and launch date",
@@ -64,6 +66,7 @@ const roadmap: RoadmapItem[] = [
   },
   {
     phase: "Phase 3",
+    status: "Next",
     title: "Holder Access",
     items: [
       "Secure NFT whitelist spots for ZkRott holders",
@@ -74,6 +77,7 @@ const roadmap: RoadmapItem[] = [
   },
   {
     phase: "Phase 4",
+    status: "Future",
     title: "ZkRott in 3D",
     items: [
       "Introduce 3D versions of selected ZkRott NFTs",
@@ -105,7 +109,7 @@ const nftCarouselSetMarkup = nftItems
   .map(
     (item) => `
       <div class="nft-card">
-        <img src="${item.image}" alt="${item.name}" />
+        <img src="${item.image}" alt="${item.name}" width="560" height="560" loading="lazy" decoding="async" />
         <div class="nft-card-meta">
           <span>${item.name}</span>
           <strong>Genesis</strong>
@@ -131,7 +135,7 @@ const roadmapMarkup = roadmap
   .map(
     (item) => `
       <div class="roadmap-item">
-        <span class="phase">${item.phase}</span>
+        <span class="phase">${item.phase} · ${item.status}</span>
         <h3>${item.title}</h3>
         <ul>
           ${item.items.map((roadmapItem) => `<li>${roadmapItem}</li>`).join("")}
@@ -155,7 +159,7 @@ app.innerHTML = `
   <div class="shell">
     <div class="site-header">
       <a class="logo" href="#top" aria-label="ZkRott home">
-        <img class="logo-image" src="/assets/zkrott-logo.jpeg" alt="" />
+        <img class="logo-image" src="/assets/zkrott-logo.jpeg" alt="" width="128" height="128" />
         <span>ZkRott</span>
       </a>
       <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-nav">
@@ -177,27 +181,28 @@ app.innerHTML = `
       <div class="hero" id="mint">
         <div class="wrap hero-grid">
           <div>
-            <div class="eyebrow"><span class="status-dot"></span> Genesis mint opening soon</div>
+            <div class="eyebrow"><span class="status-dot"></span> Public mint live on OpenSea</div>
             <h1>ZkRott</h1>
             <div class="hero-copy">
-              A dark-chain NFT collection of corrupted guardians, forged for collectors who like their art loud,
-              strange, and impossible to tame.
+              1,111 rotten misfits born from the Zero Key blackout. Every crooked face carries a lost memory
+              from a city that refused to stay dead.
             </div>
             <div class="hero-actions">
               <a class="btn btn-primary" href="https://opensea.io/collection/zkrott" target="_blank" rel="noopener">Mint on OpenSea</a>
               <a class="btn" href="#gallery">View Collection</a>
             </div>
+            <div class="mint-note">Official mint only: opensea.io/collection/zkrott</div>
           </div>
 
           <div class="mint-card" aria-label="Featured ZkRott NFT">
             <div class="art-frame">
-              <img class="hero-nft" src="/assets/zkrott-hero.jpg" alt="ZkRott zombie NFT character wearing headphones" />
+              <img class="hero-nft" src="/assets/zkrott-hero.jpg" alt="ZkRott zombie NFT character wearing headphones" width="900" height="900" decoding="async" fetchpriority="high" />
             </div>
             <div class="mint-details">
               <div class="detail-row"><span>Supply</span><strong>1,111</strong></div>
               <div class="detail-row"><span>Chain</span><strong>Robinhood</strong></div>
               <div class="detail-row"><span>Mint Price</span><strong>$2.26</strong></div>
-              <div class="detail-row"><span>Allowlist</span><strong>Ongoing</strong></div>
+              <div class="detail-row"><span>Status</span><strong>Public Mint Live</strong></div>
             </div>
           </div>
         </div>
@@ -268,9 +273,10 @@ app.innerHTML = `
       <div class="final-cta">
         <div class="wrap">
           <h2>Join The Hoard</h2>
-          <div class="cta-copy">ZkRott is getting ready for its genesis mint.</div>
+          <div class="cta-copy">Public mint is live on Robinhood Chain. Mint only through the official OpenSea collection.</div>
           <div class="hero-actions centered">
-            <a class="btn" href="https://x.com/zkrott_labz?s=11" target="_blank" rel="noopener">X / Twitter</a>
+            <a class="btn btn-primary" href="https://opensea.io/collection/zkrott" target="_blank" rel="noopener">Mint on OpenSea</a>
+            <a class="btn" href="https://x.com/zkrott_labz?s=11" target="_blank" rel="noopener">Follow on X</a>
           </div>
         </div>
       </div>
