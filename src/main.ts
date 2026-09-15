@@ -5,7 +5,7 @@ type Phase = { number: string; status: string; title: string; copy: string };
 
 const OPENSEA_URL = "https://opensea.io/collection/zkrott";
 const X_URL = "https://x.com/zkrott_labz?s=11";
-const CONTRACT_ADDRESS = "0x506588ac3c426468092e7ddb640d2bb1a429cd03";
+const CONTRACT_ADDRESS = "0xd0975e560a30c313f9c51ba6127f90058bc47d70";
 
 const records = [3500, 3501, 3502, 3503, 3504, 3505, 3506, 3507, 3508, 3509, 3510, 3511];
 
