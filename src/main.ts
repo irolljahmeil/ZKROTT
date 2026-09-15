@@ -1,239 +1,209 @@
 import "./styles.css";
 
-type NftItem = { id: string; name: string; image: string };
-type Trait = { index: string; title: string; values: string };
-type RoadmapItem = { phase: string; status: string; title: string; copy: string };
+type Evidence = { code: string; title: string; copy: string; image: string };
+type Phase = { number: string; status: string; title: string; copy: string };
 
 const OPENSEA_URL = "https://opensea.io/collection/zkrott";
 const X_URL = "https://x.com/zkrott_labz?s=11";
 const CONTRACT_ADDRESS = "0x506588ac3c426468092e7ddb640d2bb1a429cd03";
 
-const nftImageIds = [
-  3500, 3501, 3502, 3503, 3504, 3505, 3506, 3507, 3508, 3509,
-  3510, 3511, 3512, 3513, 3514, 3515, 3516, 3517, 3518, 3519,
-  3520, 3521, 3522, 3523, 3525, 3528,
+const records = [3500, 3501, 3502, 3503, 3504, 3505, 3506, 3507, 3508, 3509, 3510, 3511];
+
+const evidence: Evidence[] = [
+  { code: "EV-01", title: "Memory objects", copy: "Mouth traits are physical memories recovered from the streets of Rotwood.", image: "/assets/zkrott-3505.jpg" },
+  { code: "EV-02", title: "First death", copy: "Scars and facial damage record how a Rott died before the Key remade them.", image: "/assets/zkrott-3501.jpg" },
+  { code: "EV-03", title: "Blackout wear", copy: "Clothing and headwear preserve what they wore when the city went dark.", image: "/assets/zkrott-3508.jpg" },
+  { code: "EV-04", title: "Last location", copy: "Every background points to the Rotwood district that Rott still haunts.", image: "/assets/zkrott-3503.jpg" },
 ];
 
-const nftItems: NftItem[] = nftImageIds.map((imageId, index) => {
-  const tokenNumber = String(index + 1).padStart(4, "0");
-  return { id: tokenNumber, name: `zkRott #${tokenNumber}`, image: `/assets/zkrott-${imageId}.jpg` };
-});
-
-const traits: Trait[] = [
-  { index: "01", title: "Background", values: "Purple · Beige · Teal · Mint · Terracotta · Navy" },
-  { index: "02", title: "Skin", values: "Pale · Yellow · Marble · Slime · Carbon · Gold" },
-  { index: "03", title: "Eyes", values: "Sleepy · Angry · Spiral · Pearl · Scope · Electric" },
-  { index: "04", title: "Hair", values: "Dreadlocks · Spikes · Curls · Seaweed · None" },
-  { index: "05", title: "Headwear", values: "Caps · Crowns · Helmets · Bandanas · Headphones" },
-  { index: "06", title: "Mouth", values: "Matches · Cigarettes · Gum · Relics · Tools" },
-  { index: "07", title: "Clothing", values: "Hoodies · Jackets · Vests · Toga · Diving suit" },
-  { index: "08", title: "Face", values: "Drool · Slime · Scopes · Tears · Glowing effects" },
+const phases: Phase[] = [
+  { number: "01", status: "COMPLETE", title: "The Remaking", copy: "Artwork, traits, metadata, and the first 1,111 are complete. Public mint is live." },
+  { number: "02", status: "NEXT SIGNAL", title: "Enter Rotwood", copy: "A lightweight playable Rotwood opens its first districts. Holders begin collecting Memory Fragments." },
+  { number: "03", status: "LOCKED", title: "Permanent Change", copy: "Fragments begin affecting actual Rotts. Repair and corruption paths become permanent choices." },
+  { number: "04", status: "UNMAPPED", title: "Deeper Rotwood", copy: "New districts, limited narrative sequences, and the first animated pieces emerge from the city." },
 ];
 
-const roadmap: RoadmapItem[] = [
-  { phase: "01", status: "Complete", title: "Build the Rott", copy: "Artwork, traits, metadata, lore and the first home for the hoard." },
-  { phase: "02", status: "Live", title: "The Awakening", copy: "The 1,111 collection is live on OpenSea for $2.26 per mint." },
-  { phase: "03", status: "Next", title: "Holder Access", copy: "Partner spots, raffles and selected community opportunities for holders." },
-  { phase: "04", status: "Future", title: "Beyond the PFP", copy: "Limited 3D characters, animation and more stories from Rotwood." },
-];
+const keySymbol = `
+  <svg class="zero-key" viewBox="0 0 64 64" aria-hidden="true">
+    <circle cx="20" cy="20" r="10"></circle>
+    <path d="M27 27 52 52M39 39l7-7M46 46l7-7"></path>
+    <path class="key-break" d="m28 36 8-8"></path>
+  </svg>`;
+
+const recordMarkup = records.map((imageId, index) => {
+  const token = String(index + 1).padStart(4, "0");
+  const district = ["Ash Ward", "Low Chapel", "Drain Nine", "Dead Market"][index % 4];
+  return `
+    <article class="record-card">
+      <div class="record-image"><img src="/assets/zkrott-${imageId}.jpg" alt="zkRott record ${token}" width="600" height="600" loading="lazy" decoding="async" /></div>
+      <div class="record-meta"><span>RECORD / ${token}</span><strong>${district}</strong></div>
+    </article>`;
+}).join("");
+
+const evidenceMarkup = evidence.map((item) => `
+  <article class="evidence-card">
+    <div class="evidence-photo"><img src="${item.image}" alt="${item.title} evidence" width="420" height="420" loading="lazy" decoding="async" /><span>${item.code}</span></div>
+    <div class="evidence-copy"><p>SCANNED FILE</p><h3>${item.title}</h3><div class="redaction" aria-hidden="true"></div><p>${item.copy}</p></div>
+  </article>`).join("");
+
+const phaseMarkup = phases.map((phase) => `
+  <article class="phase-card">
+    <div class="phase-index">PHASE ${phase.number}</div>
+    <div><span>${phase.status}</span><h3>${phase.title}</h3><p>${phase.copy}</p></div>
+  </article>`).join("");
 
 const app = document.querySelector<HTMLDivElement>("#app");
 if (!app) throw new Error("App root was not found.");
 
-const galleryMarkup = nftItems.map((item) => `
-  <article class="pfp-card">
-    <img src="${item.image}" alt="${item.name}" width="560" height="560" loading="lazy" decoding="async" />
-    <div class="pfp-meta"><span>${item.name}</span><span>Genesis</span></div>
-  </article>
-`).join("");
-
-const traitsMarkup = traits.map((trait) => `
-  <article class="trait-row">
-    <span class="trait-index">${trait.index}</span>
-    <div><h3>${trait.title}</h3><p>${trait.values}</p></div>
-  </article>
-`).join("");
-
-const roadmapMarkup = roadmap.map((item) => `
-  <article class="roadmap-row">
-    <div class="roadmap-number">${item.phase}</div>
-    <div class="roadmap-copy">
-      <div class="roadmap-topline"><h3>${item.title}</h3><span class="status status-${item.status.toLowerCase()}">${item.status}</span></div>
-      <p>${item.copy}</p>
-    </div>
-  </article>
-`).join("");
-
-const accountHeader = (time: string) => `
-  <div class="account-line">
-    <img class="account-avatar" src="/assets/zkrott-logo.jpeg" alt="" width="96" height="96" />
-    <div class="account-copy">
-      <div><strong>zkRott</strong><span class="official-mark" aria-label="Official">ZK</span></div>
-      <span>@zkrott_labz · ${time}</span>
+app.innerHTML = `
+  <div class="transmission" data-transmission aria-label="Recovered transmission">
+    <div class="transmission-noise" aria-hidden="true"></div>
+    <div class="transmission-copy">
+      ${keySymbol}
+      <p class="signal-code">SIGNAL / ZK-000</p>
+      <p class="transmission-line line-one">ZERO KEY FAILURE DETECTED</p>
+      <p class="transmission-line line-two">1,111 CONSCIOUS BODIES FOUND</p>
+      <p class="transmission-line line-three">RECORDS RECOVERED</p>
+      <button type="button" data-skip>Skip transmission</button>
     </div>
   </div>
-`;
 
-app.innerHTML = `
   <div class="site-shell">
-    <header class="topbar" id="top">
+    <header class="site-header" id="top">
       <a class="brand" href="#top" aria-label="zkRott home">
-        <img src="/assets/zkrott-logo.jpeg" alt="" width="128" height="128" />
-        <span>zkRott</span>
+        <img src="/assets/zkrott-logo.jpeg" alt="" width="96" height="96" />
+        <span><strong>zkRott</strong><small>ROTWOOD ARCHIVE</small></span>
       </a>
-      <div class="top-symbol" aria-hidden="true">ZK</div>
-      <nav class="desktop-nav" aria-label="Primary navigation">
-        <a href="#gallery">Art</a><a href="#lore">Lore</a><a href="#traits">Traits</a><a href="#roadmap">Roadmap</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu><span></span><span></span><span></span><span class="sr-only">Open menu</span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="#records">Records</a><a href="#evidence">Evidence</a><a href="#rotwood">Rotwood</a><a href="#roadmap">Phases</a>
+        <a class="nav-cta" href="${OPENSEA_URL}" target="_blank" rel="noopener">Take the memory</a>
       </nav>
-      <a class="top-mint" href="${OPENSEA_URL}" target="_blank" rel="noopener">Mint $2.26</a>
     </header>
 
-    <nav class="feed-tabs" aria-label="Explore zkRott">
-      <a class="is-active" href="#mint">Mint Live</a><a href="#gallery">Art</a><a href="#lore">Story</a><a href="#traits">Traits</a><a href="#roadmap">Roadmap</a>
-    </nav>
-
-    <div class="page-grid">
-      <main class="feed" aria-label="zkRott collection feed">
-        <section class="feed-post hero-post" id="mint">
-          ${accountHeader("LIVE")}
-          <div class="post-content">
-            <p class="post-announcement"><span>●</span> Public mint is live. 1,111 Rotts are waiting on OpenSea.</p>
-            <div class="featured-card">
-              <div class="featured-intro">
-                <div class="featured-title">
-                  <img src="/assets/zkrott-logo.jpeg" alt="" width="80" height="80" />
-                  <div><strong>zkRott Genesis</strong><span>Official collection</span></div>
-                </div>
-                <h1>Rotten.<br />Still moving.</h1>
-                <p class="lead">Born from the Zero Key blackout. Every crooked face carries something the dead city forgot.</p>
-              </div>
-              <div class="hero-media">
-                <img src="/assets/zkrott-hero.jpg" alt="Featured zkRott character" width="900" height="900" fetchpriority="high" decoding="async" />
-                <div class="media-stamp">GENESIS / 1,111</div>
-              </div>
-              <div class="featured-footer">
-                <div class="mint-facts" aria-label="Mint details">
-                  <div><span>Price</span><strong>$2.26</strong></div><div><span>Chain</span><strong>Robinhood</strong></div>
-                  <div><span>Supply</span><strong>1,111</strong></div><div><span>Status</span><strong class="live-value">Live</strong></div>
-                </div>
-                <div class="contract-block">
-                  <div><span>Official contract</span><code>${CONTRACT_ADDRESS}</code></div>
-                  <button class="copy-button" type="button" data-copy-contract>Copy</button>
-                </div>
-              </div>
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-signal"><span></span> RECOVERED TRANSMISSION / PUBLIC MINT LIVE</div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">ROTWOOD // FILE 1111</p>
+            <h1 id="hero-title">The Key is dead.<br /><em>1,111 remain.</em></h1>
+            <p class="hero-lead">Only 1,111 bodies stayed conscious when the Zero Key failed. They became the Rotts—the last living records of everything Rotwood tried to erase.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="${OPENSEA_URL}" target="_blank" rel="noopener">Claim your unfinished face</a>
+              <a class="button button-ghost" href="#rotwood">Enter Rotwood ↓</a>
             </div>
-            <div class="post-actions">
-              <a class="primary-action" href="${OPENSEA_URL}" target="_blank" rel="noopener">Mint on OpenSea</a>
-              <a class="secondary-action" href="${X_URL}" target="_blank" rel="noopener">Follow @zkrott_labz</a>
+            <div class="signal-strip"><span>CHAIN / ROBINHOOD</span><span>PRICE / $2.26</span><span>STATUS / LIVE</span></div>
+          </div>
+
+          <aside class="mint-notice" aria-label="Public mint details">
+            <div class="notice-pin" aria-hidden="true"></div>
+            <div class="notice-header"><span>PERSONS OF INTEREST</span><strong>ACTIVE FILE</strong></div>
+            <div class="notice-portrait">
+              <img src="/assets/zkrott-hero.jpg" alt="A recovered zkRott portrait" width="900" height="900" fetchpriority="high" decoding="async" />
+              <div class="portrait-stamp">REMADE</div>
             </div>
-            <p class="safety-note">Mint only through the official OpenSea collection linked here.</p>
+            <div class="notice-title"><span>SUBJECT CLASS</span><h2>zkRott</h2><p>Last seen: Rotwood</p></div>
+            <dl class="mint-data"><div><dt>Fixed supply</dt><dd>1,111</dd></div><div><dt>Mint</dt><dd>$2.26</dd></div><div><dt>Stage</dt><dd>Public / Live</dd></div></dl>
+            <a class="button button-dark" href="${OPENSEA_URL}" target="_blank" rel="noopener">Take the memory ↗</a>
+            <button class="contract-copy" type="button" data-copy><span>OFFICIAL CONTRACT</span><code>${CONTRACT_ADDRESS}</code><strong>Copy</strong></button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="manifesto section-shell" aria-label="Collection rules">
+        <div class="section-label">ARCHIVE NOTE / 001</div>
+        <div class="manifesto-grid">
+          <h2>Not a collection of faces.<br />A record of what was erased.</h2>
+          <div class="manifesto-copy"><p>The Key had enough power to remake exactly 1,111 bodies. The number is final. No second supply. No replacements.</p><p>Lower token numbers woke first. <strong>#1111 is the last incomplete one.</strong></p></div>
+        </div>
+        <div class="rule-line"><span>01 / FIXED</span><span>02 / CONSCIOUS</span><span>03 / UNREPEATABLE</span><span>04 / STILL REMEMBERING</span></div>
+      </section>
+
+      <section class="records section-shell" id="records" aria-labelledby="records-title">
+        <div class="section-heading"><div><p>THE LIVING RECORDS</p><h2 id="records-title">First to wake</h2></div><p class="section-intro">Every face is a case file. Every number marks when consciousness returned.</p></div>
+        <div class="records-grid">${recordMarkup}</div>
+        <a class="text-link" href="${OPENSEA_URL}" target="_blank" rel="noopener">Open all 1,111 records on OpenSea ↗</a>
+      </section>
+
+      <section class="evidence section-shell" id="evidence" aria-labelledby="evidence-title">
+        <div class="section-heading"><div><p>FORENSIC INDEX</p><h2 id="evidence-title">Traits are evidence</h2></div><p class="section-intro">Nothing here is decoration. The body remembers even when the mind cannot.</p></div>
+        <div class="evidence-board">${evidenceMarkup}</div>
+        <article class="incomplete-file"><div class="incomplete-mark">BROKEN<br />/ INCOMPLETE</div><div><p>RARE CLASSIFICATION</p><h3>Only partially remade.</h3><p>Some Rotts ran out of signal before the Key finished its work. Missing color, exposed construction, broken features—the unfinished state is intentional and permanent.</p></div>${keySymbol}</article>
+      </section>
+
+      <section class="rotwood" id="rotwood" aria-labelledby="rotwood-title">
+        <div class="rotwood-inner section-shell">
+          <div class="rotwood-copy">
+            <p class="eyebrow">PLAYABLE WORLD / ACCESS PENDING</p>
+            <h2 id="rotwood-title">Rotwood remembers what you lose.</h2>
+            <p>Your zkRott is your character. Enter the dead city, recover Memory Fragments, and decide whether to repair what remains—or corrupt it further.</p>
+            <div class="game-loop" aria-label="Rotwood game loop"><div><span>01</span><strong>Explore</strong><p>Walk the first dead districts.</p></div><div><span>02</span><strong>Recover</strong><p>Find broken pieces of history.</p></div><div><span>03</span><strong>Choose</strong><p>Repair or corrupt your Rott.</p></div></div>
           </div>
-        </section>
-
-        <section class="feed-post" id="gallery">
-          ${accountHeader("ART DROP")}
-          <div class="post-content">
-            <div class="section-heading"><p>From the hoard</p><h2>Collection preview</h2></div>
-            <div class="pfp-grid">${galleryMarkup}</div>
+          <div class="fragment-terminal">
+            <div class="terminal-top"><span>MEMORY RUN / 00:00</span><span class="terminal-live">SIGNAL WEAK</span></div>
+            <div class="fragment-visual">${keySymbol}<span>FRAGMENT<br />NOT FOUND</span></div>
+            <div class="terminal-log"><p>&gt; Hollow Crown proximity unknown</p><p>&gt; Collected memories: 00</p><p>&gt; Deep district access: HOLDER LOCKED</p></div>
+            <div class="terminal-warning">GETTING CAUGHT ERASES EVERY FRAGMENT FROM THAT RUN.</div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="feed-post" id="lore">
-          ${accountHeader("TRANSMISSION")}
-          <div class="post-content lore-copy">
-            <div class="section-heading"><p>Transmission recovered</p><h2>Born in the noise</h2></div>
-            <p>zkRott woke beneath a city with no name, no pulse, and one memory trapped between his teeth.</p>
-            <p>His long skull, hollow nose, torn neck and uneven grin mark him as a first Rott—survivors remade by the Zero Key blackout.</p>
-            <p>Every outfit, scar and mouth relic carries proof of the life he lost. Now he walks from district to district, collecting broken memories before the Hollow Crown steals them.</p>
-            <blockquote>He cannot truly die. But every return costs part of himself.</blockquote>
-          </div>
-        </section>
+      <section class="story section-shell" aria-labelledby="story-title">
+        <div class="story-key">${keySymbol}<span>ZERO KEY / OFFLINE</span></div>
+        <div class="story-copy"><p>ORIGIN RECORD</p><h2 id="story-title">The city forgot.<br />The Rotts did not.</h2><p>When the blackout hit, almost everyone lost their name. The survivors woke with long skulls, hollow noses, torn necks, and uneven grins—carrying pieces of lives that no longer existed.</p><p>Now the Hollow Crown hunts those pieces. The Rotts cannot truly die, but every return costs part of themselves.</p></div>
+      </section>
 
-        <section class="feed-post" id="traits">
-          ${accountHeader("TRAIT LOG")}
-          <div class="post-content">
-            <div class="section-heading"><p>Built different</p><h2>Traits and rarity</h2></div>
-            <div class="traits-list">${traitsMarkup}</div>
-          </div>
-        </section>
+      <section class="roadmap section-shell" id="roadmap" aria-labelledby="roadmap-title">
+        <div class="section-heading"><div><p>RECOVERY SEQUENCE</p><h2 id="roadmap-title">Four signals remain</h2></div><p class="section-intro">The world opens in phases. Permanent changes begin only after Rotwood is live.</p></div>
+        <div class="phase-list">${phaseMarkup}</div>
+      </section>
 
-        <section class="feed-post" id="roadmap">
-          ${accountHeader("ROADMAP")}
-          <div class="post-content">
-            <div class="section-heading"><p>No fake promises</p><h2>Where the hoard goes</h2></div>
-            <div class="roadmap-list">${roadmapMarkup}</div>
-          </div>
-        </section>
+      <section class="final-cta section-shell"><div class="final-symbol">${keySymbol}</div><p>FINAL TRANSMISSION</p><h2>Claim your unfinished face.</h2><p>The Key is dead. Public mint is live. Only 1,111 living records can exist.</p><div class="hero-actions"><a class="button button-primary" href="${OPENSEA_URL}" target="_blank" rel="noopener">Take the memory</a><a class="button button-ghost" href="${X_URL}" target="_blank" rel="noopener">Follow the signal on X ↗</a></div></section>
+    </main>
 
-        <section class="feed-post final-post">
-          ${accountHeader("NOW")}
-          <div class="post-content">
-            <h2>Join the hoard.</h2><p>Public mint is live on Robinhood Chain.</p>
-            <div class="post-actions">
-              <a class="primary-action" href="${OPENSEA_URL}" target="_blank" rel="noopener">Mint on OpenSea</a>
-              <a class="secondary-action" href="${X_URL}" target="_blank" rel="noopener">Open X</a>
-            </div>
-          </div>
-        </section>
-      </main>
+    <footer class="site-footer">
+      <div class="footer-brand"><img src="/assets/zkrott-logo.jpeg" alt="" width="72" height="72" /><div><strong>zkRott × Rotwood</strong><span>STAY ROTTEN.</span></div></div>
+      <div class="footer-links"><a href="${OPENSEA_URL}" target="_blank" rel="noopener">OpenSea</a><a href="${X_URL}" target="_blank" rel="noopener">X / @zkrott_labz</a></div>
+      <button type="button" class="footer-contract" data-copy><span>CONTRACT</span><code>${CONTRACT_ADDRESS}</code></button>
+    </footer>
+  </div>`;
 
-      <aside class="side-card" aria-label="Mint summary">
-        <img src="/assets/zkrott-logo.jpeg" alt="zkRott logo" width="220" height="220" />
-        <span class="side-kicker">Public mint live</span><h2>1,111 Rotts</h2><p>$2.26 · Robinhood Chain</p>
-        <a href="${OPENSEA_URL}" target="_blank" rel="noopener">Mint on OpenSea</a>
-        <small>Official contract</small><code>${CONTRACT_ADDRESS}</code>
-      </aside>
-    </div>
-
-    <nav class="mobile-dock" aria-label="Quick navigation">
-      <a href="#mint"><span>⌂</span>Home</a><a href="#gallery"><span>▦</span>Art</a>
-      <a class="dock-mint" href="${OPENSEA_URL}" target="_blank" rel="noopener"><span>ZK</span>Mint</a>
-      <a href="#lore"><span>◎</span>Lore</a><a href="${X_URL}" target="_blank" rel="noopener"><span>𝕏</span>X</a>
-    </nav>
-
-    <footer><span>© 2026 zkRott</span><span>Rotten misfits on Robinhood Chain</span></footer>
-  </div>
-`;
-
-const copyButton = document.querySelector<HTMLButtonElement>("[data-copy-contract]");
-copyButton?.addEventListener("click", async () => {
-  try {
-    await navigator.clipboard.writeText(CONTRACT_ADDRESS);
-    copyButton.textContent = "Copied";
-    window.setTimeout(() => { copyButton.textContent = "Copy"; }, 1800);
-  } catch {
-    copyButton.textContent = "Select address";
-  }
-});
-
-const feedTabLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.feed-tabs a[href^="#"]'));
-const feedSections = feedTabLinks
-  .map((link) => document.querySelector<HTMLElement>(link.getAttribute("href") ?? ""))
-  .filter((section): section is HTMLElement => Boolean(section));
-
-const updateActiveFeedTab = () => {
-  const readingLine = window.scrollY + window.innerHeight * 0.3;
-  let activeSection = feedSections[0]?.id ?? "mint";
-
-  feedSections.forEach((section) => {
-    if (section.offsetTop <= readingLine) activeSection = section.id;
-  });
-
-  feedTabLinks.forEach((link) => {
-    const isActive = link.getAttribute("href") === `#${activeSection}`;
-    link.classList.toggle("is-active", isActive);
-    if (isActive) link.setAttribute("aria-current", "location");
-    else link.removeAttribute("aria-current");
-  });
+const transmission = document.querySelector<HTMLElement>("[data-transmission]");
+const dismissTransmission = () => {
+  if (!transmission || transmission.classList.contains("is-gone")) return;
+  transmission.classList.add("is-leaving");
+  window.setTimeout(() => transmission.classList.add("is-gone"), 520);
+  try { sessionStorage.setItem("zkrott-transmission-seen", "true"); } catch { /* storage may be unavailable */ }
 };
 
-let feedTabFrame = 0;
-window.addEventListener("scroll", () => {
-  if (feedTabFrame) return;
-  feedTabFrame = window.requestAnimationFrame(() => {
-    feedTabFrame = 0;
-    updateActiveFeedTab();
-  });
-}, { passive: true });
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let transmissionSeen = false;
+try { transmissionSeen = sessionStorage.getItem("zkrott-transmission-seen") === "true"; } catch { /* storage may be unavailable */ }
+if (transmissionSeen || reduceMotion) transmission?.classList.add("is-gone");
+else window.setTimeout(dismissTransmission, 3100);
+document.querySelector("[data-skip]")?.addEventListener("click", dismissTransmission);
 
-updateActiveFeedTab();
+const menuButton = document.querySelector<HTMLButtonElement>("[data-menu]");
+const nav = document.querySelector<HTMLElement>("#site-nav");
+menuButton?.addEventListener("click", () => {
+  const open = menuButton.getAttribute("aria-expanded") === "true";
+  menuButton.setAttribute("aria-expanded", String(!open));
+  nav?.classList.toggle("is-open", !open);
+});
+nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+  menuButton?.setAttribute("aria-expanded", "false");
+  nav.classList.remove("is-open");
+}));
+
+document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((button) => {
+  button.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(CONTRACT_ADDRESS);
+      button.classList.add("is-copied");
+      const label = button.querySelector("strong");
+      if (label) label.textContent = "Copied";
+      window.setTimeout(() => { button.classList.remove("is-copied"); if (label) label.textContent = "Copy"; }, 1800);
+    } catch { window.getSelection()?.selectAllChildren(button.querySelector("code") ?? button); }
+  });
+});
