@@ -81,6 +81,7 @@ app.innerHTML = `
         <img src="/assets/zkrott-logo.jpeg" alt="" width="128" height="128" />
         <span>zkRott</span>
       </a>
+      <div class="top-symbol" aria-hidden="true">ZK</div>
       <nav class="desktop-nav" aria-label="Primary navigation">
         <a href="#gallery">Art</a><a href="#lore">Lore</a><a href="#traits">Traits</a><a href="#roadmap">Roadmap</a>
       </nav>
@@ -96,20 +97,30 @@ app.innerHTML = `
         <section class="feed-post hero-post" id="mint">
           ${accountHeader("LIVE")}
           <div class="post-content">
-            <div class="live-label"><span></span> Public mint live</div>
-            <h1>Rotten.<br />Still moving.</h1>
-            <p class="lead">1,111 misfits born from the Zero Key blackout. Every crooked face carries something the dead city forgot.</p>
-            <div class="hero-media">
-              <img src="/assets/zkrott-hero.jpg" alt="Featured zkRott character" width="900" height="900" fetchpriority="high" decoding="async" />
-              <div class="media-stamp">GENESIS / 1,111</div>
-            </div>
-            <div class="mint-facts" aria-label="Mint details">
-              <div><span>Price</span><strong>$2.26</strong></div><div><span>Chain</span><strong>Robinhood</strong></div>
-              <div><span>Supply</span><strong>1,111</strong></div><div><span>Status</span><strong class="live-value">Live</strong></div>
-            </div>
-            <div class="contract-block">
-              <div><span>Official contract</span><code>${CONTRACT_ADDRESS}</code></div>
-              <button class="copy-button" type="button" data-copy-contract>Copy</button>
+            <p class="post-announcement"><span>●</span> Public mint is live. 1,111 Rotts are waiting on OpenSea.</p>
+            <div class="featured-card">
+              <div class="featured-intro">
+                <div class="featured-title">
+                  <img src="/assets/zkrott-logo.jpeg" alt="" width="80" height="80" />
+                  <div><strong>zkRott Genesis</strong><span>Official collection</span></div>
+                </div>
+                <h1>Rotten.<br />Still moving.</h1>
+                <p class="lead">Born from the Zero Key blackout. Every crooked face carries something the dead city forgot.</p>
+              </div>
+              <div class="hero-media">
+                <img src="/assets/zkrott-hero.jpg" alt="Featured zkRott character" width="900" height="900" fetchpriority="high" decoding="async" />
+                <div class="media-stamp">GENESIS / 1,111</div>
+              </div>
+              <div class="featured-footer">
+                <div class="mint-facts" aria-label="Mint details">
+                  <div><span>Price</span><strong>$2.26</strong></div><div><span>Chain</span><strong>Robinhood</strong></div>
+                  <div><span>Supply</span><strong>1,111</strong></div><div><span>Status</span><strong class="live-value">Live</strong></div>
+                </div>
+                <div class="contract-block">
+                  <div><span>Official contract</span><code>${CONTRACT_ADDRESS}</code></div>
+                  <button class="copy-button" type="button" data-copy-contract>Copy</button>
+                </div>
+              </div>
             </div>
             <div class="post-actions">
               <a class="primary-action" href="${OPENSEA_URL}" target="_blank" rel="noopener">Mint on OpenSea</a>
