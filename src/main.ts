@@ -169,7 +169,7 @@ app.innerHTML = `
         <a href="#lore">Lore</a>
         <a href="#traits">Traits</a>
         <a href="#roadmap">Roadmap</a>
-        <a class="nav-mint" href="#mint">Mint</a>
+        <a class="nav-mint" href="https://opensea.io/collection/zkrott" target="_blank" rel="noopener">Mint</a>
       </div>
     </div>
 
@@ -184,7 +184,7 @@ app.innerHTML = `
               strange, and impossible to tame.
             </div>
             <div class="hero-actions">
-              <button class="btn btn-primary" type="button" disabled>Mint Soon</button>
+              <a class="btn btn-primary" href="https://opensea.io/collection/zkrott" target="_blank" rel="noopener">Mint on OpenSea</a>
               <a class="btn" href="#gallery">View Collection</a>
             </div>
           </div>
@@ -281,7 +281,7 @@ app.innerHTML = `
         <div>&copy; 2026 ZkRott. All rights reserved.</div>
         <div class="socials">
           <a href="https://x.com/zkrott_labz?s=11" target="_blank" rel="noopener">X</a>
-          <a href="#mint">Mint</a>
+          <a href="https://opensea.io/collection/zkrott" target="_blank" rel="noopener">Mint</a>
         </div>
       </div>
     </div>
