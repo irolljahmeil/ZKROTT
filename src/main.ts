@@ -270,7 +270,7 @@ app.innerHTML = `
           <h2>Join The Hoard</h2>
           <div class="cta-copy">ZkRott is getting ready for its genesis mint.</div>
           <div class="hero-actions centered">
-            <a class="btn" href="https://x.com/zkrott_labz" target="_blank" rel="noopener">X / Twitter</a>
+            <a class="btn" href="https://x.com/zkrott_labz?s=11" target="_blank" rel="noopener">X / Twitter</a>
           </div>
         </div>
       </div>
@@ -280,7 +280,7 @@ app.innerHTML = `
       <div class="footer-row">
         <div>&copy; 2026 ZkRott. All rights reserved.</div>
         <div class="socials">
-          <a href="https://x.com/zkrott_labz" target="_blank" rel="noopener">X</a>
+          <a href="https://x.com/zkrott_labz?s=11" target="_blank" rel="noopener">X</a>
           <a href="#mint">Mint</a>
         </div>
       </div>
