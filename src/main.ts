@@ -194,3 +194,35 @@ copyButton?.addEventListener("click", async () => {
     copyButton.textContent = "Select address";
   }
 });
+
+const feedTabLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.feed-tabs a[href^="#"]'));
+const feedSections = feedTabLinks
+  .map((link) => document.querySelector<HTMLElement>(link.getAttribute("href") ?? ""))
+  .filter((section): section is HTMLElement => Boolean(section));
+
+const updateActiveFeedTab = () => {
+  const readingLine = window.scrollY + window.innerHeight * 0.3;
+  let activeSection = feedSections[0]?.id ?? "mint";
+
+  feedSections.forEach((section) => {
+    if (section.offsetTop <= readingLine) activeSection = section.id;
+  });
+
+  feedTabLinks.forEach((link) => {
+    const isActive = link.getAttribute("href") === `#${activeSection}`;
+    link.classList.toggle("is-active", isActive);
+    if (isActive) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+};
+
+let feedTabFrame = 0;
+window.addEventListener("scroll", () => {
+  if (feedTabFrame) return;
+  feedTabFrame = window.requestAnimationFrame(() => {
+    feedTabFrame = 0;
+    updateActiveFeedTab();
+  });
+}, { passive: true });
+
+updateActiveFeedTab();
