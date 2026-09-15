@@ -121,8 +121,8 @@ h1 em { color: var(--paper); font-style: normal; }
 .section-intro { color: #aaa69d; line-height: 1.65; }
 .records-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: rgba(232,224,210,.15); border: 1px solid var(--line); }
 .record-card { min-width: 0; background: var(--coal); }
-.record-image { overflow: hidden; background: #272820; }
-.record-image img { width: 100%; aspect-ratio: 1/1; object-fit: cover; filter: saturate(.76) contrast(1.04); transition: transform .35s ease, filter .35s ease; }
+.record-image { aspect-ratio: 1/1; overflow: hidden; background: #272820; }
+.record-image img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.76) contrast(1.04); transition: transform .35s ease, filter .35s ease; }
 .record-card:hover img { transform: scale(1.025); filter: saturate(1); }
 .record-meta { display: flex; justify-content: space-between; gap: .5rem; padding: .72rem; font: 600 .62rem var(--mono); }
 .record-meta span { color: var(--fog); }
