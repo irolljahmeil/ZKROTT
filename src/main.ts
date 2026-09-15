@@ -155,7 +155,7 @@ app.innerHTML = `
   <div class="shell">
     <div class="site-header">
       <a class="logo" href="#top" aria-label="ZkRott home">
-        <img class="logo-image" src="/assets/zkrott-logo.png" alt="" />
+        <img class="logo-image" src="/assets/zkrott-logo.jpeg" alt="" />
         <span>ZkRott</span>
       </a>
       <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-nav">
