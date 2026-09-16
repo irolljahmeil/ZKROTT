@@ -5,6 +5,7 @@ type Phase = { number: string; status: string; title: string; copy: string };
 
 const OPENSEA_URL = "https://opensea.io/collection/zkrott";
 const X_URL = "https://x.com/zkrott_labz?s=11";
+const X_POST_URL = "https://x.com/zkrott_labz/status/2099728664795521409";
 const CONTRACT_ADDRESS = "0xd0975e560a30c313f9c51ba6127f90058bc47d70";
 
 const records = [3500, 3501, 3502, 3503, 3504, 3505, 3506, 3507, 3508, 3509, 3510, 3511];
@@ -66,6 +67,38 @@ app.innerHTML = `
       <p class="transmission-line line-three">RECORDS RECOVERED</p>
       <button type="button" data-skip>Skip transmission</button>
     </div>
+  </div>
+
+  <div class="access-gate" data-access-gate role="dialog" aria-modal="true" aria-labelledby="access-title">
+    <div class="access-static" aria-hidden="true"></div>
+    <section class="access-panel">
+      <header class="access-header">
+        <div class="access-mark">${keySymbol}</div>
+        <div><p>MEMBERSHIP SIGNAL / 111 GTD</p><span>MANUAL SOCIAL CHECK</span></div>
+      </header>
+      <div class="access-copy">
+        <p class="eyebrow">ENTRY REQUIREMENTS</p>
+        <h2 id="access-title">Prove you followed the signal.</h2>
+        <p>Complete the three X actions, then leave your username and Robinhood Chain wallet to enter the archive.</p>
+      </div>
+      <div class="access-actions" aria-label="Required X actions">
+        <a href="${X_URL}" target="_blank" rel="noopener"><span>01</span><strong>Follow @zkrott_labz</strong><b>Open X ↗</b></a>
+        <a href="${X_POST_URL}" target="_blank" rel="noopener"><span>02</span><strong>Comment on the post</strong><b>Open post ↗</b></a>
+        <a href="${X_POST_URL}" target="_blank" rel="noopener"><span>03</span><strong>Repost the signal</strong><b>Open post ↗</b></a>
+      </div>
+      <form class="access-form" data-access-form novalidate>
+        <div class="access-confirmations">
+          <label><input type="checkbox" name="followed" required /><span>I followed the account</span></label>
+          <label><input type="checkbox" name="commented" required /><span>I commented on the post</span></label>
+          <label><input type="checkbox" name="reposted" required /><span>I reposted the post</span></label>
+        </div>
+        <label class="access-field"><span>X username</span><input type="text" name="username" placeholder="@username" autocomplete="username" maxlength="30" required /></label>
+        <label class="access-field"><span>Robinhood Chain wallet</span><input type="text" name="wallet" placeholder="0x..." inputmode="text" autocomplete="off" spellcheck="false" required /></label>
+        <p class="access-error" data-access-error role="alert" aria-live="polite"></p>
+        <button class="button button-primary access-submit" type="submit">Request membership access</button>
+        <p class="access-note">One X account. One wallet. Social actions may be checked manually.</p>
+      </form>
+    </section>
   </div>
 
   <div class="site-shell">
@@ -183,6 +216,45 @@ try { transmissionSeen = sessionStorage.getItem("zkrott-transmission-seen") === 
 if (transmissionSeen || reduceMotion) transmission?.classList.add("is-gone");
 else window.setTimeout(dismissTransmission, 3100);
 document.querySelector("[data-skip]")?.addEventListener("click", dismissTransmission);
+
+const accessGate = document.querySelector<HTMLElement>("[data-access-gate]");
+const accessForm = document.querySelector<HTMLFormElement>("[data-access-form]");
+const accessError = document.querySelector<HTMLElement>("[data-access-error]");
+const accessStorageKey = "zkrott-membership-access";
+let accessGranted = false;
+try { accessGranted = localStorage.getItem(accessStorageKey) === "granted"; } catch { /* storage may be unavailable */ }
+
+if (accessGranted) accessGate?.classList.add("is-gone");
+else document.body.classList.add("access-locked");
+
+accessForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const data = new FormData(accessForm);
+  const username = String(data.get("username") ?? "").trim();
+  const wallet = String(data.get("wallet") ?? "").trim();
+  const actionsComplete = ["followed", "commented", "reposted"].every((name) => data.get(name) === "on");
+  const usernameValid = /^@?[A-Za-z0-9_]{1,15}$/.test(username);
+  const walletValid = /^0x[a-fA-F0-9]{40}$/.test(wallet);
+
+  if (!actionsComplete) {
+    if (accessError) accessError.textContent = "Confirm all three X actions before requesting access.";
+    return;
+  }
+  if (!usernameValid) {
+    if (accessError) accessError.textContent = "Enter a valid X username.";
+    return;
+  }
+  if (!walletValid) {
+    if (accessError) accessError.textContent = "Enter a valid 0x wallet address.";
+    return;
+  }
+
+  try { localStorage.setItem(accessStorageKey, "granted"); } catch { /* access still works for this visit */ }
+  if (accessError) accessError.textContent = "";
+  accessGate?.classList.add("is-leaving");
+  document.body.classList.remove("access-locked");
+  window.setTimeout(() => accessGate?.classList.add("is-gone"), 420);
+});
 
 const menuButton = document.querySelector<HTMLButtonElement>("[data-menu]");
 const nav = document.querySelector<HTMLElement>("#site-nav");
